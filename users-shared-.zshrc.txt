@@ -9,6 +9,7 @@ else
     echo "Oh My Zsh not found in $HOME/.oh-my-zsh for user: $USER"
 fi
 
+defaults write com.apple.finder "AppleShowAllFiles" -bool "true"
 
 # Set theme
 ZSH_THEME="agnoster"
