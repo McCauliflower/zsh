@@ -1,0 +1,12 @@
+# local .zshrc
+source /Users/Shared/.zshrc
+source ~/.oh-my-zsh/themes/agnoster.zsh-theme
+apply_custom_prompt >/dev/null 2>&1
+
+# look for local homebrew instance
+export PATH=$HOME/.homebrew/bin:$PATH
+export HOMEBREW_NO_ANALYTICS=1
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

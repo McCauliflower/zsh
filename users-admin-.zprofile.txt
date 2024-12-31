@@ -5,7 +5,6 @@ if [ -f /Users/Shared/.zshrc ]; then
   source /Users/Shared/.zshrc
 fi
 
-# LOCAL OVERRIDES
-
-# Add user-specific PATH entries:
-export PATH="$HOME/.local/bin:/Users/mccalltucker/Library/Python/3.9/bin:$PATH"
+# look for local homebrew instance
+export PATH=$HOME/.homebrew/bin:$PATH
+export HOMEBREW_NO_ANALYTICS=1
