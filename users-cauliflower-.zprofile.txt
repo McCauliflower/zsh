@@ -1,28 +1,10 @@
-# ~/.zprofile
+# local .zshrc
+source /Users/Shared/.zshrc
 
-echo "Sourcing ~/.zprofile"
+# look for local homebrew instance
+export PATH=$HOME/.homebrew/bin:$PATH
+export HOMEBREW_NO_ANALYTICS=1
 
-# Source the shared zshrc
-if [ -f /Users/Shared/.zshrc ]; then
-  source /Users/Shared/.zshrc
-fi
-
-# LOCAL OVERRIDES
-
-# Add user-specific PATH entries:
-export PATH="$HOME/.local/bin:/opt/homebrew/sbin:$PATH"
-
-# set homebrew envs 
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
-# Path to your Oh My Zsh installation
-export ZSH="/Users/cauliflower/.oh-my-zsh"
-
-# Plugins
-plugins=(git git-auto-fetch history aliases alias-finder aws battery nvm nodenv zsh-interactive-cd zsh-navigation-tools)
-
-# Source Oh My Zsh
-source $ZSH/oh-my-zsh.sh
-
-# Load fzf if available
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
