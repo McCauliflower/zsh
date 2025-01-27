@@ -1,3 +1,5 @@
+# /Users/Shared/.zshrc
+
 # Prevent recursive sourcing
 if [[ -n $SHARED_ZSHRC_LOADED ]]; then
   echo "Exiting: /Users/Shared/.zshrc already loaded"
@@ -7,38 +9,49 @@ export SHARED_ZSHRC_LOADED=1
 
 echo "Sourcing /Users/Shared/.zshrc"
 
-# Initialize Oh My Zsh (shared logic for all users)
+# Initialize Oh My Zsh
 if [ -d "$HOME/.oh-my-zsh" ]; then
   export ZSH="$HOME/.oh-my-zsh"
   source $ZSH/oh-my-zsh.sh
 else
   echo "Oh My Zsh not found"
 fi
+
 # Set theme
 ZSH_THEME="agnoster"
 
-# Git prompt customization
-PROMPT='👽-₵₳ɄⱠł₣ⱠØ₩ɆⱤ  %{$fg[green]%}%~%{$fg_bold[blue]%}$(git_prompt_info)%{$reset_color%} '
-ZSH_THEME_GIT_PROMPT_PREFIX="("
-ZSH_THEME_GIT_PROMPT_SUFFIX=")"
-ZSH_THEME_GIT_PROMPT_DIRTY=" ✗"
-ZSH_THEME_GIT_PROMPT_CLEAN=" ✔"
+# Customize the prompt after Agnoster is loaded
+function apply_custom_prompt {
+  # Git prompt customization
+  ZSH_THEME_GIT_PROMPT_PREFIX="("
+  ZSH_THEME_GIT_PROMPT_SUFFIX=")"
+  ZSH_THEME_GIT_PROMPT_DIRTY=" ✗"
+  ZSH_THEME_GIT_PROMPT_CLEAN=" ✔"
 
-# Update settings
+  # Modify prompt
+  PROMPT="👽 ₵₳ɄⱠł₣ⱠØ₩ɆⱤ ${PROMPT}"
+
+  # Remove user@hostname from the prompt
+  export DEFAULT_USER=$USER
+}
+
+apply_custom_prompt
+export apply_custom_prompt
+
+# Other settings and aliases
 zstyle ':omz:update' mode auto
-
-# Set MANPATH
 export MANPATH="/usr/local/man:$MANPATH"
-
-# Aliases
 alias ..='cd ../../'
 alias ...='cd ../../../'
 alias ll='/bin/ls -laH'
 alias n='nano'
 alias reload='source /Users/Shared/.zshrc'
 alias ipconfig='ip addr'
-# Editor
 export EDITOR=nano
 
-
-
+# Finder tweaks
+defaults write com.apple.finder AppleShowAllFiles -bool true
+defaults write com.apple.finder ShowPathbar -bool true
+defaults write com.apple.finder ShowStatusBar -bool true
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+defaults write com.apple.finder _FXSortFoldersFirst -bool true%
