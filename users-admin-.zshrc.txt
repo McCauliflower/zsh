@@ -1,10 +1,23 @@
-# ~/.zprofile
+# local .zshrc
+source /Users/Shared/.zshrc
+source ~/.oh-my-zsh/themes/agnoster.zsh-theme
+apply_custom_prompt >/dev/null 2>&1
 
-# Source the shared zshrc
-if [ -f /Users/Shared/.zshrc ]; then
-  source /Users/Shared/.zshrc
+# Check if running inside VSCode terminal
+if [[ "$TERM_PROGRAM" == "vscode" ]]; then
+  function build_prompt {
+    echo "%F{green}VSCode%f:%F{blue}%~%f $(git_prompt_info)"
+  } # Apply the custom prompt
+  export PS1="$(build_prompt)"
 fi
 
+#show hidden files
+defaults write com.apple.finder "AppleShowAllFiles" -bool "true"
+
 # look for local homebrew instance
-export PATH=$HOME/.homebrew/bin:$PATH
-export HOMEBREW_NO_ANALYTICS=1
+export PATH=$HOME/.homebrew/bin:/Users/mccauliflower/.brew/bin:/Users/mccauliflower/.brew/sbin:$PATH
+
+# source nvm
+source $(brew --prefix nvm)/nvm.sh
+
+alias micro="./micro"
